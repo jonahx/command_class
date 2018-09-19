@@ -79,7 +79,7 @@ On the benefits of Functional Command Objects:
 
 https://www.icelab.com.au/notes/functional-command-objects-in-ruby/
 
-For a more complex, but also more fully-featured version of this ideas, see:
+For a more complex, but also more fully-featured version of this idea, see:
 
 https://dry-rb.org/gems/dry-transaction/
 
