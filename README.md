@@ -6,7 +6,9 @@ gem install command_class
 
 # Example Use
 
-1. Define your command object class.  This is a longish but real-worldish example:
+1. Define your command object class.  This is a longish but real-worldish example.
+
+**NOTE:** `dependencies` are static and created once.  `inputs` are dynamic values passed at runtime.
 
 ```ruby
 CreateUser = CommandClass.new(
