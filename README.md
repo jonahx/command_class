@@ -1,7 +1,8 @@
 # Command Class
 
 Command Class is an implementation of [functional command objects](https://www.icelab.com.au/notes/functional-command-objects-in-ruby/),
-which can be used to encapsulate the data and logic used to execute a command.
+which encapsulate the data and logic used to execute a command such that it can
+be called on demand and at a later time if desired.
 
 This is similar to the Command design pattern but differs slightly since the
 pattern offloads command execution to an 'invoker' reference that is stored
