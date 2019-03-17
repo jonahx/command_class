@@ -1,0 +1,1 @@
+UserRepo = Class.new

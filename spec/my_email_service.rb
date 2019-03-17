@@ -1,0 +1,1 @@
+MyEmailService = Class.new

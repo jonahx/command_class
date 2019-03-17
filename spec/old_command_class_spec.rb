@@ -1,12 +1,10 @@
 require 'rspec'
 require_relative '../lib/command_class'
-require_relative './create_user'
+require_relative './create_user2'
 
 describe CommandClass do
 
-  # NOTE: See create_user.rb for example usage.
-  #
-  context "CreateUser with ::Include syntax and custom errors" do
+  context "Full CreateUser2 example using legacy syntax" do
     let(:email_svc) { spy('email') }
     let(:user_repo) { spy('user_repo') }
     let(:valid_name) { 'John' }
@@ -21,7 +19,7 @@ describe CommandClass do
       end 
 
       subject(:create_user) do
-        CreateUser.new(user_repo: happy_repo, email_service: email_svc)
+        CreateUser2.new(user_repo: happy_repo, email_service: email_svc)
       end
 
       it 'inserts the user into the db' do
@@ -38,19 +36,19 @@ describe CommandClass do
 
     describe "invalid user input" do
       subject(:create_user) do
-        CreateUser.new(user_repo: user_repo, email_service: email_svc)
+        CreateUser2.new(user_repo: user_repo, email_service: email_svc)
       end
 
       it 'errors for a short name' do
         expect do
           create_user.(name: 'x', email: valid_email, password: valid_pw)
-        end.to raise_error(CreateUser::InvalidName)
+        end.to raise_error(Errors::InvalidName)
       end
 
       it 'errors on an invalid email' do
         expect do
           create_user.(name: valid_email, email: 'bad_email', password: valid_pw)
-        end.to raise_error(CreateUser::InvalidEmail)
+        end.to raise_error(Errors::InvalidEmail)
       end
     end
 
@@ -62,13 +60,13 @@ describe CommandClass do
       end 
 
       subject(:create_user) do
-        CreateUser.new(user_repo: repo_with_email, email_service: email_svc)
+        CreateUser2.new(user_repo: repo_with_email, email_service: email_svc)
       end
 
       it 'errors' do
         expect do
           create_user.(name: valid_name, email: valid_email, password: valid_pw)
-        end.to raise_error(CreateUser::EmailAlreadyExists)
+        end.to raise_error(Errors::EmailAlreadyExists)
       end
     end
   end

@@ -1,6 +1,18 @@
 class CommandClass
+
+  module Include
+    def command_class(dependencies:, inputs:, &blk)
+      CommandClass.commandify(self, dependencies, inputs, &blk)
+    end
+  end
+
   def self.new(dependencies:, inputs:, &blk)
-    cmd_cls = Class.new
+    commandify(Class.new, dependencies, inputs, &blk)
+  end
+
+  # Turns the class into a command class
+  #
+  def self.commandify(cmd_cls, dependencies, inputs, &blk)
     cmd_cls.const_set('DEFAULT_DEPS', dependencies)
 
     cmd_cls.class_eval <<~RUBY
@@ -28,6 +40,7 @@ class CommandClass
   class << self
 
     private
+
 
     # TODO: allow for unnamed as well
     def cmd_call_signature(inputs)
